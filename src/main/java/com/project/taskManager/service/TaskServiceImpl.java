@@ -56,7 +56,7 @@ public class TaskServiceImpl implements TaskService{
         task.setSchedule(request.getSchedule());
         task.setPayload(request.getPayload());
         task.setMaxRetries(request.getMaxRetries());
-        task.setUpdatedAt(Instant.now());
+        task.setLastRunAt(Instant.now());
 
         Task saved = taskRepository.save(task);
         return TaskConverter.toResponse(saved);

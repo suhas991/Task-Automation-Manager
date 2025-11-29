@@ -40,6 +40,6 @@ public class Task {
 
     private Instant createdAt;
 
-    private  Instant updatedAt;
+    private  Instant lastRunAt;
 
 }

@@ -19,7 +19,7 @@ public class TaskConverter {
                 .retryCount(0)
                 .status(TaskStatus.PENDING)
                 .createdAt(Instant.now())
-                .updatedAt(Instant.now())
+                .lastRunAt(Instant.now())
                 .build();
     }
 
@@ -34,7 +34,7 @@ public class TaskConverter {
                 .maxRetries(task.getMaxRetries())
                 .retryCount(task.getRetryCount())
                 .createdAt(task.getCreatedAt())
-                .updatedAt(task.getUpdatedAt())
+                .updatedAt(task.getLastRunAt())
                 .build();
     }
 }
