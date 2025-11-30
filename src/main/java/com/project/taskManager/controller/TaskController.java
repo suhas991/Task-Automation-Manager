@@ -2,6 +2,9 @@ package com.project.taskManager.controller;
 
 import com.project.taskManager.dto.request.TaskRequest;
 import com.project.taskManager.dto.response.TaskResponse;
+import com.project.taskManager.entity.TaskExecutionLog;
+import com.project.taskManager.exception.TaskNotFoundException;
+import com.project.taskManager.repository.TaskExecutionLogRepository;
 import com.project.taskManager.service.TaskService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -19,6 +22,9 @@ public class TaskController {
 
     @Autowired
     private TaskService taskService;
+
+    @Autowired
+    private TaskExecutionLogRepository taskExecutionLogRepository;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -45,5 +51,13 @@ public class TaskController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteTask(@PathVariable Long id){
         taskService.deleteTask(id);
+    }
+
+    @GetMapping("/{id}/logs")
+    @ResponseStatus(HttpStatus.OK)
+    public List<TaskExecutionLog> getAllLogsById(@PathVariable Long id){
+        List<TaskExecutionLog> logs =
+                taskExecutionLogRepository.findByTaskIdOrderByStartedAtDesc(id);
+        return logs;
     }
 }
